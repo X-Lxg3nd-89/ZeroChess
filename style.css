@@ -1,15 +1,16 @@
-/* ZeroChess — style.css */
 
 @font-face {
   font-family: "Korataki";
   src: url("fonts/korataki_extrabold.otf") format("opentype");
   font-weight: 800;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "Korataki";
   src: url("fonts/korataki_bold.otf") format("opentype");
   font-weight: 700;
+  font-style: normal;
 }
 
 * {
@@ -24,8 +25,9 @@ html, body {
 
 body {
   font-family: "Inter", Arial, sans-serif;
-  background-color: black;
-  color: white;
+  background-color: #000;
+  color: #f2f2f2;
+  line-height: 1.5;
   overflow: hidden;
 }
 
@@ -64,13 +66,19 @@ svg {
 .menu-screen {
   align-items: center;
   justify-content: center;
-  background-color: black;
+  background-color: #000;
   padding: 24px;
+  overflow-y: auto;
 }
 
 .menu-card {
   width: 100%;
   max-width: 480px;
+  background-color: #000;
+  border: 1px solid #1f1f1f;
+  border-radius: 14px;
+  padding: 40px 36px 28px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
 }
 
 /* logo */
@@ -83,7 +91,7 @@ svg {
   width: 56px;
   height: 56px;
   margin: 0 auto 10px;
-  color: white;
+  color: #fff;
 }
 
 .logo-title {
@@ -103,7 +111,7 @@ svg {
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 3px;
-  color: gray;
+  color: #9a9a9a;
   margin-top: 14px;
   text-transform: uppercase;
 }
@@ -120,7 +128,7 @@ svg {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: gray;
+  color: #555;
   margin-bottom: 10px;
 }
 
@@ -136,20 +144,26 @@ svg {
   align-items: flex-start;
   padding: 14px 12px;
   background-color: #121212;
-  border: 1px solid #333;
-  border-radius: 8px;
+  border: 1px solid #1f1f1f;
+  border-radius:8px;
   text-align: left;
+}
+
+.mode-btn:hover {
+  border-color: #333;
+  background-color: #0d0d0d;
 }
 
 .mode-btn.active {
   border-color: #e0263d;
+  background-color: rgba(224, 38, 61, 0.08);
 }
 
 .mode-icon {
   width: 18px;
   height: 18px;
   margin-bottom: 6px;
-  color: white;
+  color: #fff;
 }
 
 .mode-btn.active .mode-icon {
@@ -166,7 +180,8 @@ svg {
 
 .mode-desc {
   font-size: 10px;
-  color: gray;
+  font-weight: 400;
+  color: #555;
   margin-top: 4px;
 }
 
@@ -174,26 +189,32 @@ svg {
 .difficulty-selector {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
+  gap:6px;
 }
 
 .diff-btn {
   padding: 9px 4px;
   background-color: #121212;
-  border: 1px solid #333;
-  border-radius: 8px;
+  border: 1px solid #1f1f1f;
+  border-radius:8px;
   font-size: 12px;
   font-weight: 700;
 }
 
+.diff-btn:hover {
+  border-color: #333;
+}
+
 .diff-btn.active {
   border-color: #e0263d;
+  background-color: rgba(224, 38, 61, 0.1);
   color: #e0263d;
 }
 
 .diff-hint {
   font-size: 11px;
-  color: gray;
+  font-weight: 400;
+  color: #555;
   margin-top: 8px;
   text-align: center;
 }
@@ -202,23 +223,28 @@ svg {
 .side-selector {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
+  gap:6px;
 }
 
 .side-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display:flex;
+  align-items: center; justify-content: center;
   gap: 6px;
   padding: 9px 6px;
   background-color: #121212;
-  border: 1px solid #333;
+  border: 1px solid #1f1f1f;
   border-radius: 8px;
   font-size: 12px;
+  font-weight: 500;
+}
+
+.side-btn:hover {
+  border-color: #333;
 }
 
 .side-btn.active {
   border-color: #e0263d;
+  background-color: rgba(224, 38, 61, 0.1);
 }
 
 .side-swatch {
@@ -229,15 +255,15 @@ svg {
 }
 
 .side-swatch.light {
-  background-color: white;
+  background-color: #f0f0f0;
 }
 
 .side-swatch.dark {
-  background-color: black;
+  background-color: #1a1a1a;
 }
 
 .side-swatch.random {
-  background-color: gray;
+  background: linear-gradient(135deg, #f0f0f0 50%, #1a1a1a 50%);
 }
 
 /* time */
@@ -250,14 +276,19 @@ svg {
 .time-btn {
   padding: 9px 4px;
   background-color: #121212;
-  border: 1px solid #333;
+  border: 1px solid #1f1f1f;
   border-radius: 8px;
   font-size: 12px;
   font-weight: 700;
 }
 
+.time-btn:hover {
+  border-color: #333;
+}
+
 .time-btn.active {
   border-color: #e0263d;
+  background-color: rgba(224, 38, 61, 0.1);
   color: #e0263d;
 }
 
@@ -268,17 +299,22 @@ svg {
   justify-content: center;
   padding: 10px 18px;
   background-color: #121212;
-  border: 1px solid #333;
+  border: 1px solid #1f1f1f;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
-  color: white;
+  color: #f2f2f2;
+}
+
+.btn:hover {
+  background-color: #0d0d0d;
+  border-color: #333;
 }
 
 .btn-primary {
   background-color: #e0263d;
   border-color: #e0263d;
-  color: white;
+  color: #fff;
   font-family: "Korataki", sans-serif;
   font-weight: 800;
   letter-spacing: 2px;
@@ -286,16 +322,26 @@ svg {
   font-size: 13px;
 }
 
+.btn-primary:hover {
+  background-color: #f03350;
+  border-color: #f03350;
+}
+
 .btn-large {
   width: 100%;
   padding: 16px;
+  font-size: 14px;
   margin-top: 8px;
 }
 
 .link-btn {
-  color: gray;
+  color: #9a9a9a;
   font-size: 13px;
   text-decoration: underline;
+}
+
+.link-btn:hover {
+  color: #e0263d;
 }
 
 .menu-footer {
@@ -307,13 +353,14 @@ svg {
 }
 
 .dot {
-  color: gray;
+  color: #555;
 }
 
 /* game screen */
 .game-screen {
   flex-direction: column;
-  background-color: black;
+  background-color: #000;
+  overflow: hidden;
 }
 
 .game-header {
@@ -321,7 +368,8 @@ svg {
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  border-bottom: 1px solid #333;
+  background-color: #000;
+  border-bottom: 1px solid #1f1f1f;
 }
 
 .game-title {
@@ -344,7 +392,7 @@ svg {
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  color: white;
+  color: #fff;
 }
 
 .icon-btn svg {
@@ -352,11 +400,15 @@ svg {
   height: 18px;
 }
 
-/* game layout */
+.icon-btn:hover {
+  background-color: #121212;
+  color: #e0263d;
+}
+
 .game-layout {
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr 300px;
+  grid-template-columns: 1fr 320px;
   gap: 20px;
   padding: 20px;
   overflow: hidden;
@@ -368,6 +420,7 @@ svg {
   align-items: center;
   justify-content: center;
   gap: 12px;
+  overflow: hidden;
 }
 
 /* player bars */
@@ -378,7 +431,8 @@ svg {
   width: 100%;
   max-width: 640px;
   padding: 10px 14px;
-  border: 1px solid #333;
+  background-color: #000;
+  border: 1px solid #1f1f1f;
   border-radius: 8px;
 }
 
@@ -390,7 +444,7 @@ svg {
   justify-content: center;
   background-color: #121212;
   border-radius: 50%;
-  color: white;
+  color: #fff;
 }
 
 .player-avatar svg {
@@ -412,7 +466,8 @@ svg {
 
 .player-captured {
   font-size: 14px;
-  color: gray;
+  color: #555;
+  letter-spacing: -2px;
 }
 
 .player-clock {
@@ -428,22 +483,28 @@ svg {
 
 .player-clock.active {
   background-color: #e0263d;
-  color: white;
+  color: #fff;
+}
+
+.player-clock.low {
+  color: #ff3b3b;
 }
 
 /* board */
 .board-wrapper {
   position: relative;
   padding: 22px;
-  border: 1px solid #333;
+  background-color: #000;
+  border: 1px solid #1f1f1f;
   border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
 }
 
 .board-coords {
   position: absolute;
   font-family: "Courier New", monospace;
   font-size: 11px;
-  color: gray;
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .board-coords-files {
@@ -480,6 +541,7 @@ svg {
   display: flex;
   align-items: center;
   justify-content: center;
+  user-select: none;
 }
 
 .square.light {
@@ -523,59 +585,61 @@ svg {
   justify-content: center;
   font-size: 56px;
   line-height: 1;
+  cursor: grab;
 }
 
 .piece.white {
-  color: white;
+  color: #f5f5f5;
 }
 
 .piece.black {
-  color: black;
+  color: #0d0d0d;
 }
 
 /* board states */
 .square.selected {
-  background-color: #e0263d;
+  background-color: rgba(224, 38, 61, 0.65);
 }
 
 .square.legal-move::after {
   content: "";
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 26%;
+  height: 26%;
   border-radius: 50%;
-  background-color: rgba(224, 38, 61, 0.6);
+  background-color: rgba(224, 38, 61, 0.45);
 }
 
 .square.legal-capture::after {
   content: "";
   position: absolute;
-  width: 60px;
-  height: 60px;
+  width: 88%;
+  height: 88%;
   border-radius: 50%;
-  border: 4px solid #e0263d;
+  border: 4px solid rgba(224, 38, 61, 0.55);
 }
 
 .square.last-move {
-  background-color: #4a1520;
+  background-color: rgba(224, 38, 61, 0.28);
 }
 
 .square.check {
-  background-color: #8a1525;
+  background-color: rgba(255, 59, 59, 0.6);
 }
 
 /* sidebar */
 .sidebar {
   display: flex;
   flex-direction: column;
-  border: 1px solid #333;
+  background-color: #000;
+  border: 1px solid #1f1f1f;
   border-radius: 14px;
   overflow: hidden;
 }
 
 .sidebar-tabs {
   display: flex;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #1f1f1f;
 }
 
 .tab-btn {
@@ -586,12 +650,17 @@ svg {
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: gray;
+  color: #9a9a9a;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-btn:hover {
+  color: #f2f2f2;
 }
 
 .tab-btn.active {
   color: #e0263d;
-  border-bottom: 2px solid #e0263d;
+  border-bottom-color: #e0263d;
 }
 
 .tab-panel {
@@ -612,7 +681,7 @@ svg {
 }
 
 .empty-hint {
-  color: gray;
+  color: #555;
   font-size: 13px;
   text-align: center;
   padding: 24px 0;
@@ -623,16 +692,33 @@ svg {
   grid-template-columns: 28px 1fr 1fr;
   gap: 6px;
   padding: 5px 6px;
+  border-radius: 5px;
   font-size: 13px;
   font-family: "Courier New", monospace;
 }
 
+.move-row:nth-child(odd) {
+  background-color: #0a0a0a;
+}
+
 .move-num {
-  color: gray;
+  color: #555;
 }
 
 .move-san {
-  color: white;
+  color: #f2f2f2;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.move-san:hover {
+  background-color: #121212;
+}
+
+.move-san.current {
+  background-color: #e0263d;
+  color: #fff;
+  font-weight: 600;
 }
 
 #panel-info {
@@ -650,14 +736,14 @@ svg {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: gray;
+  color: #555;
   margin-bottom: 8px;
 }
 
 .eval-bar {
   height: 10px;
-  background-color: #121212;
-  border: 1px solid #333;
+  background-color: #111;
+  border: 1px solid #1f1f1f;
   border-radius: 5px;
   overflow: hidden;
 }
@@ -665,7 +751,7 @@ svg {
 .eval-fill {
   height: 100%;
   width: 50%;
-  background-color: white;
+  background: linear-gradient(90deg, #2a2a2a, #d8d8d8);
 }
 
 .eval-text {
@@ -673,7 +759,7 @@ svg {
   text-align: center;
   font-family: "Courier New", monospace;
   font-size: 12px;
-  color: gray;
+  color: #9a9a9a;
   margin-top: 6px;
 }
 
@@ -686,7 +772,7 @@ svg {
   justify-content: space-between;
   font-size: 13px;
   padding: 4px 0;
-  color: gray;
+  color: #9a9a9a;
 }
 
 /* controls */
@@ -695,7 +781,7 @@ svg {
   grid-template-columns: 1fr 1fr;
   gap: 6px;
   padding: 12px;
-  border-top: 1px solid #333;
+  border-top: 1px solid #1f1f1f;
 }
 
 .ctrl-btn {
@@ -705,19 +791,30 @@ svg {
   gap: 6px;
   padding: 10px 8px;
   background-color: #121212;
-  border: 1px solid #333;
+  border: 1px solid #1f1f1f;
   border-radius: 8px;
   font-family: "Korataki", sans-serif;
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: white;
+  color: #fff;
 }
 
 .ctrl-btn svg {
   width: 13px;
   height: 13px;
+}
+
+.ctrl-btn:hover {
+  background-color: #0d0d0d;
+  color: #e0263d;
+  border-color: #333;
+}
+
+.ctrl-btn.danger:hover {
+  color: #ff3b3b;
+  border-color: #ff3b3b;
 }
 
 /* modals */
@@ -742,8 +839,8 @@ svg {
 .modal {
   width: 100%;
   max-width: 440px;
-  background-color: black;
-  border: 1px solid #333;
+  background-color: #000;
+  border: 1px solid #1f1f1f;
   border-radius: 14px;
   overflow: hidden;
 }
@@ -757,7 +854,7 @@ svg {
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #1f1f1f;
 }
 
 .modal-header h3 {
@@ -774,7 +871,7 @@ svg {
 
 .modal-body p {
   margin-bottom: 10px;
-  color: gray;
+  color: #9a9a9a;
   font-size: 14px;
 }
 
@@ -784,7 +881,7 @@ svg {
 }
 
 .modal-body li {
-  color: gray;
+  color: #9a9a9a;
   font-size: 13px;
   margin-bottom: 4px;
 }
@@ -794,7 +891,7 @@ svg {
   gap: 8px;
   justify-content: flex-end;
   padding: 14px 20px;
-  border-top: 1px solid #333;
+  border-top: 1px solid #1f1f1f;
 }
 
 .modal-small .modal-footer {
@@ -806,7 +903,7 @@ svg {
   align-items: center;
   justify-content: space-between;
   padding: 10px 0;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #1f1f1f;
   font-size: 14px;
 }
 
@@ -816,9 +913,9 @@ svg {
 
 .setting-row select {
   background-color: #121212;
-  border: 1px solid #333;
+  border: 1px solid #1f1f1f;
   border-radius: 6px;
-  color: white;
+  color: #f2f2f2;
   padding: 6px 10px;
   font-size: 13px;
 }
@@ -826,6 +923,8 @@ svg {
 .setting-row input[type="checkbox"] {
   width: 18px;
   height: 18px;
+  accent-color: #e0263d;
+  cursor: pointer;
 }
 
 /* game over modal */
@@ -855,7 +954,7 @@ svg {
 }
 
 .modal-small p {
-  color: gray;
+  color: #9a9a9a;
 }
 
 /* promotion picker */
@@ -872,16 +971,32 @@ svg {
   align-items: center;
   justify-content: center;
   font-size: 40px;
-  color: white;
+  color: #f2f2f2;
   background-color: #121212;
-  border: 1px solid #333;
+  border: 1px solid #1f1f1f;
   border-radius: 8px;
 }
 
 .promo-btn:hover {
+  background-color: #0d0d0d;
   border-color: #e0263d;
   color: #e0263d;
 }
+
+/* themes */
+body[data-theme="crimson"] .square.light { background-color: #2a0a10; }
+body[data-theme="crimson"] .square.dark { background-color: #0a0000; }
+
+body[data-theme="ember"] .square.light { background-color: #3a2018; }
+body[data-theme="ember"] .square.dark { background-color: #120806; }
+
+body[data-theme="steel"] .square.light { background-color: #d8d8d8; } body[data-theme="steel"] .square.dark { background-color: #1a1a1a; }
+
+body[data-theme="carbon"] .square.light { background-color: #2a2a2a; }
+body[data-theme="carbon"] .square.dark { background-color: #0f0f0f; }
+
+body[data-theme="blood"] .square.light { background-color: #4a0d16; }
+body[data-theme="blood"] .square.dark { background-color: #0a0000; }
 
 /* responsive */
 @media (max-width: 1100px) {
@@ -892,7 +1007,7 @@ svg {
     height: 512px;
   }
   .game-layout {
-    grid-template-columns: 1fr 260px;
+    grid-template-columns: 1fr 280px;
     gap: 14px;
     padding: 14px;
   }
@@ -925,8 +1040,14 @@ svg {
     width: calc(100vw - 60px);
     height: calc(100vw - 60px);
   }
+  .menu-card {
+    padding: 28px 22px 22px;
+  }
   .logo-title {
     font-size: 26px;
+  }
+  .logo-tagline {
+    font-size: 8px;
   }
   .game-header {
     padding: 10px 14px;
@@ -955,8 +1076,14 @@ svg {
 @media (max-width: 480px) {
   .logo-title {
     font-size: 22px;
+    letter-spacing: 0;
   }
-  .mode-name,
+  .menu-card {
+    padding: 24px 18px 18px;
+  }
+  .mode-name {
+    font-size: 9px;
+  }
   .mode-desc {
     font-size: 9px;
   }
