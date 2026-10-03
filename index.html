@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ZeroChess</title>
   <meta name="description" content="Play chess vs the computer or a friend." />
-  <meta name="theme-color" content="#1a1a1a" />
+  <meta name="theme-color" content="#000000" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -14,13 +14,74 @@
 </head>
 <body>
 
+  <!-- icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-knight" viewBox="0 0 384 512">
+        <path d="m19 272.47 40.63 18.06a32 32 0 0024.88.47l12.78-5.12a32 32 0 0018.76-20.5l9.22-30.65a24 24 0 0112.55-15.65L159.94 208v50.33a48 48 0 01-26.53 42.94l-57.22 28.65A80 80 0 0032 401.48V416h319.86V224c0-106-85.92-192-191.92-192H12A12 12 0 000 44a16.9 16.9 0 001.79 7.58L16 80l-9 9a24 24 0 00-7 17v137.21a32 32 0 0019 29.26zM52 128a20 20 0 11-20 20 20 20 0 0120-20zm316 320H16a16 16 0 00-16 16v32a16 16 0 0016 16h352a16 16 0 0016-16v-32a16 16 0 00-16-16z"/>
+      </symbol>
+
+      <symbol id="i-users" viewBox="0 0 24 24">
+        <path d="M16 11c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm-8 0c1.7 0 3-1.3 3-3S9.7 5 8 5 5 6.3 5 8s1.3 3 3 3zm0 2c-2.3 0-7 1.2-7 3.5V19h14v-2.5C15 14.2 10.3 13 8 13zm8 0c-.3 0-.6 0-.9.1 1.2.9 1.9 2 1.9 3.4V19h6v-2.5c0-2.3-4.7-3.5-7-3.5z" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="i-user" viewBox="0 0 24 24">
+        <path d="M12 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 2c-2.7 0-8 1.3-8 4v2h16v-2c0-2.7-5.3-4-8-4z" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="i-robot" viewBox="0 0 24 24">
+        <path d="M12 2a1 1 0 011 1v2h4a2 2 0 012 2v3h1a1 1 0 011 1v3a1 1 0 01-1 1h-1v4a2 2 0 01-2 2H7a2 2 0 01-2-2v-4H4a1 1 0 01-1-1v-3a1 1 0 011-1h1V7a2 2 0 012-2h4V3a1 1 0 011-1zM9 9a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm6 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-6 7v2h6v-2H9z" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="i-undo" viewBox="0 0 24 24">
+        <path d="M12.5 8c-2.6 0-5 1-6.8 2.6L3 7.9V16h8.1l-2.7-2.7c1.3-1.1 2.9-1.8 4.7-1.8 3 0 5.6 2 6.4 4.8l2-.6c-1.1-3.7-4.5-6.2-8.4-6.2z" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="i-flip" viewBox="0 0 24 24">
+        <path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="i-bulb" viewBox="0 0 24 24">
+        <path d="M9 21h6v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .6.4 1 1 1h6c.6 0 1-.4 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7zm2.8 11.3-.8.5V16H10v-2.2l-.8-.5C7.9 12.5 7 10.9 7 9c0-2.8 2.2-5 5-5s5 2.2 5 5c0 1.9-.9 3.5-2.2 4.3z" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="i-flag" viewBox="0 0 24 24">
+        <path d="M6 2v20h2v-8h9.5l-2.5-3 2.5-3H8V2H6z" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="i-back" viewBox="0 0 24 24">
+        <path d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20v-2z" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="i-gear" viewBox="0 0 24 24">
+        <path d="M19.4 13c.04-.3.06-.6.06-1s-.02-.7-.07-1l2.1-1.6c.2-.15.25-.4.13-.6l-2-3.5c-.13-.2-.4-.3-.6-.2l-2.5 1c-.5-.4-1.1-.7-1.7-1l-.4-2.7c-.04-.2-.2-.35-.4-.35h-4c-.2 0-.36.15-.4.35l-.4 2.7c-.6.25-1.2.6-1.7 1l-2.5-1c-.2-.06-.47 0-.6.2l-2 3.5c-.13.2-.08.45.13.6L4.6 11c-.04.3-.07.65-.07 1s.02.7.07 1l-2.1 1.6c-.2.15-.25.4-.13.6l2 3.5c.13.2.4.3.6.2l2.5-1c.5.4 1.1.7 1.7 1l.4 2.7c.04.2.2.35.4.35h4c.2 0 .36-.15.4-.35l.4-2.7c.6-.25 1.2-.6 1.7-1l2.5 1c.2.06.47 0 .6-.2l2-3.5c.13-.2.08-.45-.13-.6L19.4 13zM12 15.5c-1.9 0-3.5-1.6-3.5-3.5S10.1 8.5 12 8.5s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="i-close" viewBox="0 0 24 24">
+        <path d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="i-trophy" viewBox="0 0 24 24">
+        <path d="M18 4h3v3c0 1.7-1.3 3-3 3h-.3c-.5 1.2-1.4 2.2-2.7 2.7V15h3v2H6v-2h3v-2.3c-1.3-.5-2.2-1.5-2.7-2.7H6c-1.7 0-3-1.3-3-3V4h3V2h12v2zm-12 4H4v1c0 .6.4 1 1 1h1V8zm14 0h-1v2h1c.6 0 1-.4 1-1V8h-1zM8 18h8v2H8v-2z" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="i-crown" viewBox="0 0 24 24">
+        <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z" fill="currentColor"/>
+      </symbol>
+
+      <symbol id="i-skull" viewBox="0 0 24 24">
+        <path d="M12 2C7.6 2 4 5.6 4 10c0 2.4 1.1 4.5 2.8 6v3c0 .6.4 1 1 1h1v-2h2v2h2.4v-2h2v2h1c.6 0 1-.4 1-1v-3c1.7-1.5 2.8-3.6 2.8-6 0-4.4-3.6-8-8-8zM9 12c-.8 0-1.5-.7-1.5-1.5S8.2 9 9 9s1.5.7 1.5 1.5S9.8 12 9 12zm6 0c-.8 0-1.5-.7-1.5-1.5S14.2 9 15 9s1.5.7 1.5 1.5S15.8 12 15 12z" fill="currentColor"/>
+      </symbol>
+    </defs>
+  </svg>
+
   <div id="app" class="app">
 
     <!-- menu -->
     <section id="menu-screen" class="screen menu-screen active">
       <div class="menu-card">
         <div class="logo">
-          <span class="logo-knight">♞</span>
+          <svg class="logo-knight" viewBox="0 0 384 512"><use href="#i-knight"/></svg>
           <h1 class="logo-title">Zero<span class="logo-accent">Chess</span></h1>
           <p class="logo-tagline">Play chess. No accounts. No ads. No nonsense.</p>
         </div>
@@ -29,12 +90,12 @@
           <label class="menu-label">Game Mode</label>
           <div class="mode-selector" id="mode-selector">
             <button class="mode-btn active" data-mode="ai">
-              <span class="mode-icon">🤖</span>
+              <svg class="mode-icon" viewBox="0 0 24 24"><use href="#i-robot"/></svg>
               <span class="mode-name">vs Computer</span>
               <span class="mode-desc">Play against the engine</span>
             </button>
             <button class="mode-btn" data-mode="human">
-              <span class="mode-icon">👥</span>
+              <svg class="mode-icon" viewBox="0 0 24 24"><use href="#i-users"/></svg>
               <span class="mode-name">Two Players</span>
               <span class="mode-desc">Local pass-and-play</span>
             </button>
@@ -49,7 +110,7 @@
             <button class="diff-btn" data-diff="hard">Hard</button>
             <button class="diff-btn" data-diff="expert">Expert</button>
           </div>
-          <p class="diff-hint" id="diff-hint">~800 Elo 👥 Casual player</p>
+          <p class="diff-hint" id="diff-hint">~800 Elo · Casual player</p>
         </div>
 
         <div class="menu-section" id="side-section">
@@ -81,7 +142,7 @@
 
         <div class="menu-footer">
           <button class="link-btn" id="how-to-play-btn">How to Play</button>
-          <span class="dot">👥</span>
+          <span class="dot">·</span>
           <button class="link-btn" id="menu-settings-btn">Settings</button>
         </div>
       </div>
@@ -90,10 +151,14 @@
     <!-- game -->
     <section id="game-screen" class="screen game-screen">
       <header class="game-header">
-        <button class="icon-btn" id="back-to-menu" title="Back to menu">←</button>
+        <button class="icon-btn" id="back-to-menu" title="Back to menu">
+          <svg viewBox="0 0 24 24"><use href="#i-back"/></svg>
+        </button>
         <h2 class="game-title">ZeroChess</h2>
         <div class="game-header-actions">
-          <button class="icon-btn" id="game-settings-btn" title="Settings">⚙</button>
+          <button class="icon-btn" id="game-settings-btn" title="Settings">
+            <svg viewBox="0 0 24 24"><use href="#i-gear"/></svg>
+          </button>
         </div>
       </header>
 
@@ -101,7 +166,9 @@
         <div class="board-column">
 
           <div class="player-bar" id="top-player">
-            <div class="player-avatar" id="top-avatar">🤖</div>
+            <div class="player-avatar" id="top-avatar">
+              <svg viewBox="0 0 24 24"><use href="#i-robot"/></svg>
+            </div>
             <div class="player-info">
               <span class="player-name" id="top-name">Computer</span>
               <span class="player-captured" id="top-captured"></span>
@@ -116,7 +183,9 @@
           </div>
 
           <div class="player-bar" id="bottom-player">
-            <div class="player-avatar" id="bottom-avatar">⚙</div>
+            <div class="player-avatar" id="bottom-avatar">
+              <svg viewBox="0 0 24 24"><use href="#i-user"/></svg>
+            </div>
             <div class="player-info">
               <span class="player-name" id="bottom-name">You</span>
               <span class="player-captured" id="bottom-captured"></span>
@@ -160,10 +229,22 @@
           </div>
 
           <div class="controls">
-            <button class="ctrl-btn" id="undo-btn" title="Undo">↶ Undo</button>
-            <button class="ctrl-btn" id="flip-btn" title="Flip board">↶ Flip</button>
-            <button class="ctrl-btn" id="hint-btn" title="Hint">💡 Hint</button>
-            <button class="ctrl-btn danger" id="resign-btn" title="Resign">🏳 Resign</button>
+            <button class="ctrl-btn" id="undo-btn" title="Undo">
+              <svg viewBox="0 0 24 24"><use href="#i-undo"/></svg>
+              <span>Undo</span>
+            </button>
+            <button class="ctrl-btn" id="flip-btn" title="Flip board">
+              <svg viewBox="0 0 24 24"><use href="#i-flip"/></svg>
+              <span>Flip</span>
+            </button>
+            <button class="ctrl-btn" id="hint-btn" title="Hint">
+              <svg viewBox="0 0 24 24"><use href="#i-bulb"/></svg>
+              <span>Hint</span>
+            </button>
+            <button class="ctrl-btn danger" id="resign-btn" title="Resign">
+              <svg viewBox="0 0 24 24"><use href="#i-flag"/></svg>
+              <span>Resign</span>
+            </button>
           </div>
         </aside>
       </div>
@@ -174,18 +255,21 @@
       <div class="modal">
         <div class="modal-header">
           <h3>Settings</h3>
-          <button class="icon-btn" data-close-modal>🏳</button>
+          <button class="icon-btn" data-close-modal>
+            <svg viewBox="0 0 24 24"><use href="#i-close"/></svg>
+          </button>
         </div>
 
         <div class="modal-body">
           <div class="setting-row">
             <label>Board Theme</label>
             <select id="theme-select">
-              <option value="classic">Classic</option>
-              <option value="wood">Wood</option>
-              <option value="marble">Marble</option>
-              <option value="neon">Neon</option>
-              <option value="mono">Monochrome</option>
+              <option value="">Red &amp; Black</option>
+              <option value="crimson">Crimson</option>
+              <option value="ember">Ember</option>
+              <option value="steel">Steel</option>
+              <option value="carbon">Carbon</option>
+              <option value="blood">Blood</option>
             </select>
           </div>
 
@@ -221,19 +305,21 @@
       <div class="modal">
         <div class="modal-header">
           <h3>How to Play</h3>
-          <button class="icon-btn" data-close-modal></button>
+          <button class="icon-btn" data-close-modal>
+            <svg viewBox="0 0 24 24"><use href="#i-close"/></svg>
+          </button>
         </div>
 
         <div class="modal-body">
           <p><strong>Goal:</strong> Checkmate the opponent's king.</p>
           <p>Pieces move according to standard chess rules. Click or drag a piece to move it.</p>
           <ul>
-            <li>♙ Pawn  one square forward (two on first move)</li>
-            <li>♘ Knight  L-shape</li>
-            <li>♘ Bishop  diagonals</li>
-            <li>♖ Rook  ranks and files</li>
-            <li>♕ Queen  any direction</li>
-            <li>♕ King  one square any direction</li>
+            <li>♙ Pawn — one square forward (two on first move)</li>
+            <li>♘ Knight — L-shape</li>
+            <li>♗ Bishop — diagonals</li>
+            <li>♖ Rook — ranks and files</li>
+            <li>♕ Queen — any direction</li>
+            <li>♔ King — one square any direction</li>
           </ul>
           <p>Special moves: castling, en passant, promotion.</p>
         </div>
@@ -248,7 +334,9 @@
     <div class="modal-overlay" id="gameover-modal">
       <div class="modal modal-small">
         <div class="modal-body">
-          <div class="gameover-icon" id="gameover-icon">🏆</div>
+          <div class="gameover-icon" id="gameover-icon">
+            <svg viewBox="0 0 24 24"><use href="#i-trophy"/></svg>
+          </div>
           <h3 id="gameover-title">Checkmate!</h3>
           <p id="gameover-subtitle">White wins</p>
         </div>
@@ -266,10 +354,10 @@
         <div class="modal-body">
           <h3>Promote to</h3>
           <div class="promo-picker" id="promo-picker">
-            <button class="promo-btn" data-piece="q">♕</button>
-            <button class="promo-btn" data-piece="r">♖</button>
-            <button class="promo-btn" data-piece="b">♘</button>
-            <button class="promo-btn" data-piece="n">♘</button>
+            <button class="promo-btn" data-piece="q">♛</button>
+            <button class="promo-btn" data-piece="r">♜</button>
+            <button class="promo-btn" data-piece="b">♝</button>
+            <button class="promo-btn" data-piece="n">♞</button>
           </div>
         </div>
       </div>
