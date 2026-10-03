@@ -37,11 +37,7 @@ svg { display: block; }
 }
 
 .menu-card {
-  max-width: 480px;
-  margin: 0 auto;
-  background-color: #2a2a2a;
-  padding: 30px;
-  border-radius: 10px;
+  width: 100%;
 }
 
 .logo { text-align: center; margin-bottom: 30px; }
@@ -265,6 +261,7 @@ svg { display: block; }
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  flex: 1;
 }
 
 .player-bar {
@@ -407,7 +404,6 @@ svg { display: block; }
   flex-direction: column;
   background-color: #2a2a2a;
   border-radius: 6px;
-  max-width: 300px;
 }
 
 .sidebar-tabs {
