@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZeroChess</title>
+  <meta name="description" content="Play chess vs the computer or a friend." />
+  <meta name="theme-color" content="#1a1a1a" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♞</text></svg>" />
+</head>
+<body>
+
+  <div id="app" class="app">
+
+    <!-- menu -->
+    <section id="menu-screen" class="screen menu-screen active">
+      <div class="menu-card">
+        <div class="logo">
+          <span class="logo-knight">♞</span>
+          <h1 class="logo-title">Zero<span class="logo-accent">Chess</span></h1>
+          <p class="logo-tagline">Play chess. No accounts. No ads. No nonsense.</p>
+        </div>
+
+        <div class="menu-section">
+          <label class="menu-label">Game Mode</label>
+          <div class="mode-selector" id="mode-selector">
+            <button class="mode-btn active" data-mode="ai">
+              <span class="mode-icon">🤖</span>
+              <span class="mode-name">vs Computer</span>
+              <span class="mode-desc">Play against the engine</span>
+            </button>
+            <button class="mode-btn" data-mode="human">
+              <span class="mode-icon">👥</span>
+              <span class="mode-name">Two Players</span>
+              <span class="mode-desc">Local pass-and-play</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-section" id="difficulty-section">
+          <label class="menu-label">Difficulty</label>
+          <div class="difficulty-selector" id="difficulty-selector">
+            <button class="diff-btn" data-diff="easy">Easy</button>
+            <button class="diff-btn active" data-diff="medium">Medium</button>
+            <button class="diff-btn" data-diff="hard">Hard</button>
+            <button class="diff-btn" data-diff="expert">Expert</button>
+          </div>
+          <p class="diff-hint" id="diff-hint">~800 Elo 👥 Casual player</p>
+        </div>
+
+        <div class="menu-section" id="side-section">
+          <label class="menu-label">Play As</label>
+          <div class="side-selector" id="side-selector">
+            <button class="side-btn active" data-side="w">
+              <span class="side-swatch light"></span> White
+            </button>
+            <button class="side-btn" data-side="b">
+              <span class="side-swatch dark"></span> Black
+            </button>
+            <button class="side-btn" data-side="random">
+              <span class="side-swatch random"></span> Random
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-section">
+          <label class="menu-label">Time Control</label>
+          <div class="time-selector" id="time-selector">
+            <button class="time-btn" data-time="0">Unlimited</button>
+            <button class="time-btn active" data-time="600">10 min</button>
+            <button class="time-btn" data-time="300">5 min</button>
+            <button class="time-btn" data-time="180">3 min</button>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-large" id="start-game-btn">Start Game</button>
+
+        <div class="menu-footer">
+          <button class="link-btn" id="how-to-play-btn">How to Play</button>
+          <span class="dot">👥</span>
+          <button class="link-btn" id="menu-settings-btn">Settings</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- game -->
+    <section id="game-screen" class="screen game-screen">
+      <header class="game-header">
+        <button class="icon-btn" id="back-to-menu" title="Back to menu">←</button>
+        <h2 class="game-title">ZeroChess</h2>
+        <div class="game-header-actions">
+          <button class="icon-btn" id="game-settings-btn" title="Settings">⚙</button>
+        </div>
+      </header>
+
+      <div class="game-layout">
+        <div class="board-column">
+
+          <div class="player-bar" id="top-player">
+            <div class="player-avatar" id="top-avatar">🤖</div>
+            <div class="player-info">
+              <span class="player-name" id="top-name">Computer</span>
+              <span class="player-captured" id="top-captured"></span>
+            </div>
+            <div class="player-clock" id="top-clock">10:00</div>
+          </div>
+
+          <div class="board-wrapper">
+            <div class="board-coords board-coords-files" id="board-files"></div>
+            <div class="board-coords board-coords-ranks" id="board-ranks"></div>
+            <div class="board" id="board"></div>
+          </div>
+
+          <div class="player-bar" id="bottom-player">
+            <div class="player-avatar" id="bottom-avatar">⚙</div>
+            <div class="player-info">
+              <span class="player-name" id="bottom-name">You</span>
+              <span class="player-captured" id="bottom-captured"></span>
+            </div>
+            <div class="player-clock" id="bottom-clock">10:00</div>
+          </div>
+
+        </div>
+
+        <aside class="sidebar">
+          <div class="sidebar-tabs">
+            <button class="tab-btn active" data-tab="moves">Moves</button>
+            <button class="tab-btn" data-tab="info">Info</button>
+          </div>
+
+          <div class="tab-panel active" id="panel-moves">
+            <div class="moves-scroll" id="moves-list">
+              <p class="empty-hint">No moves yet.</p>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="panel-info">
+            <div class="info-block">
+              <h4>Evaluation</h4>
+              <div class="eval-bar">
+                <div class="eval-fill" id="eval-fill"></div>
+              </div>
+              <span class="eval-text" id="eval-text">0.0</span>
+            </div>
+
+            <div class="info-block">
+              <h4>Status</h4>
+              <p id="status-text" class="status-text">White to move</p>
+            </div>
+
+            <div class="info-block">
+              <h4>Material</h4>
+              <div class="material-row"><span>White</span><span id="material-white">—</span></div>
+              <div class="material-row"><span>Black</span><span id="material-black">—</span></div>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="ctrl-btn" id="undo-btn" title="Undo">↶ Undo</button>
+            <button class="ctrl-btn" id="flip-btn" title="Flip board">↶ Flip</button>
+            <button class="ctrl-btn" id="hint-btn" title="Hint">💡 Hint</button>
+            <button class="ctrl-btn danger" id="resign-btn" title="Resign">🏳 Resign</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- settings -->
+    <div class="modal-overlay" id="settings-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Settings</h3>
+          <button class="icon-btn" data-close-modal>🏳</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="setting-row">
+            <label>Board Theme</label>
+            <select id="theme-select">
+              <option value="classic">Classic</option>
+              <option value="wood">Wood</option>
+              <option value="marble">Marble</option>
+              <option value="neon">Neon</option>
+              <option value="mono">Monochrome</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <label>Show Coordinates</label>
+            <input type="checkbox" id="coords-toggle" checked />
+          </div>
+
+          <div class="setting-row">
+            <label>Highlight Legal Moves</label>
+            <input type="checkbox" id="highlights-toggle" checked />
+          </div>
+
+          <div class="setting-row">
+            <label>Sound Effects</label>
+            <input type="checkbox" id="sound-toggle" checked />
+          </div>
+
+          <div class="setting-row">
+            <label>Animations</label>
+            <input type="checkbox" id="anim-toggle" checked />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn" data-close-modal>Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- how to play -->
+    <div class="modal-overlay" id="how-to-play-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>How to Play</h3>
+          <button class="icon-btn" data-close-modal></button>
+        </div>
+
+        <div class="modal-body">
+          <p><strong>Goal:</strong> Checkmate the opponent's king.</p>
+          <p>Pieces move according to standard chess rules. Click or drag a piece to move it.</p>
+          <ul>
+            <li>♙ Pawn  one square forward (two on first move)</li>
+            <li>♘ Knight  L-shape</li>
+            <li>♘ Bishop  diagonals</li>
+            <li>♖ Rook  ranks and files</li>
+            <li>♕ Queen  any direction</li>
+            <li>♕ King  one square any direction</li>
+          </ul>
+          <p>Special moves: castling, en passant, promotion.</p>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn" data-close-modal>Got it</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- game over -->
+    <div class="modal-overlay" id="gameover-modal">
+      <div class="modal modal-small">
+        <div class="modal-body">
+          <div class="gameover-icon" id="gameover-icon">🏆</div>
+          <h3 id="gameover-title">Checkmate!</h3>
+          <p id="gameover-subtitle">White wins</p>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="rematch-btn">Rematch</button>
+          <button class="btn" id="gameover-menu-btn">Main Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- promotion -->
+    <div class="modal-overlay" id="promotion-modal">
+      <div class="modal modal-small">
+        <div class="modal-body">
+          <h3>Promote to</h3>
+          <div class="promo-picker" id="promo-picker">
+            <button class="promo-btn" data-piece="q">♕</button>
+            <button class="promo-btn" data-piece="r">♖</button>
+            <button class="promo-btn" data-piece="b">♘</button>
+            <button class="promo-btn" data-piece="n">♘</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
