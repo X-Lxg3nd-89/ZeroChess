@@ -82,7 +82,7 @@ body {
 }
 .screen.active { display: flex; }
 
-/* ===== MENU ===== */
+/* menu */
 .menu-screen {
   align-items: center;
   justify-content: center;
@@ -96,7 +96,8 @@ body {
   content: "";
   position: absolute;
   inset: -20%;
-  background:fixed    radial-gradient(ellipse 65% 45% at 15% 15%, rgba(224,38,61,0.14), transparent 60%),
+  background:
+    radial-gradient(ellipse 65% 45% at 15% 15%, rgba(224,38,61,0.14), transparent 60%),
     radial-gradient(ellipse 55% 40% at 85% 85%, rgba(224,38,61,0.10), transparent 65%),
     radial-gradient(ellipse 45% 35% at 50% 50%, rgba(224,38,61,0.05), transparent 70%);
   animation: bgPulse 8s ease-in-out infinite alternate;
@@ -108,21 +109,25 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-image:none    repeating-linear-gradient(      115deg,
+  background-image:
+    repeating-linear-gradient(
+      115deg,
       transparent 0px,
       transparent 74px,
       rgba(224,38,61,0.10) 74px,
       rgba(224,38,61,0.10) 78px,
       transparent 78px,
       transparent 80px
-  ),
-    repeating-linear-gradient(      115deg,
+    ),
+    repeating-linear-gradient(
+      115deg,
       transparent 0px,
       transparent 218px,
       rgba(255,80,100,0.06) 218px,
       rgba(255,80,100,0.06) 220px
     ),
-    repeating-linear-gradient(      115deg,
+    repeating-linear-gradient(
+      115deg,
       transparent 0px,
       transparent 380px,
       rgba(255,255,255,0.03) 380px,
