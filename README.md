@@ -1,7 +1,7 @@
 # ZeroChess
 
 A lightweight, fully client-side chess website. Play against the computer or
-against a friend on the same device — no accounts, no ads, no backend.
+against a friend on the same device
 
 Built with plain HTML, CSS, and JavaScript. No frameworks, no build tools, no
 dependencies. Open `index.html` and it runs.
@@ -74,3 +74,7 @@ dependencies. Open `index.html` and it runs.
 
 No JavaScript frameworks. No CSS frameworks. 
 
+## Getting Started
+
+1. Clone the repository
+2. Open `index.html` in any modern browser
